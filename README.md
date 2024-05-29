@@ -14,7 +14,7 @@ I have implemented the assignment using Django Rest Framework and have used clas
 
 ```http
   [
-    {
+   {
         "url": "/api/v1/products/",
         "description": "View and create products, Delete all Products"
     },
@@ -23,7 +23,11 @@ I have implemented the assignment using Django Rest Framework and have used clas
         "description": "Update or delete a product by ID."
     },
     {
-        "url": "/api/v1/products/saree/",
+        "url": "/api/v1/products_by_id/1/",
+        "description": "Find Product by ID."
+    },
+    {
+        "url": "/api/v1/products_by_title/saree/",
         "description": "Find product by title."
     },
     {
