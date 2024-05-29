@@ -15,23 +15,23 @@ I have implemented the assignment using Django Rest Framework and have used clas
 ```http
   [
     {
-        "url": "/api/v1/product/",
+        "url": "/api/v1/products/",
         "description": "View and create products, Delete all Products"
     },
     {
-        "url": "/api/v1/product/1/",
+        "url": "/api/v1/products/1/",
         "description": "Update or delete a product by ID."
     },
     {
-        "url": "/api/v1/product/saree/",
+        "url": "/api/v1/products/saree/",
         "description": "Find product by title."
     },
     {
-        "url": "/api/v1/category/men/",
+        "url": "/api/v1/categorys/men/",
         "description": "Find product by category."
     },
     {
-        "url": "/api/v1/product_price_greater_then/399/",
+        "url": "/api/v1/products_price_greater_then/399/",
         "description": "Find products with price greater than the specified value."
     }
 ]
