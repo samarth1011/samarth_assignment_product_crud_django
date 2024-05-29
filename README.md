@@ -102,10 +102,12 @@ http://localhost:8000/admin
 ```
 
 
-## Screenshots
+## Some Screenshots
 
 ![App Screenshot](https://github.com/samarth1011/samarth_assignment_product_crud_django/blob/main/screenshots/image.png?raw=true)
 
+
+#### Exception Handling
 
 ![App Screenshot](https://github.com/samarth1011/samarth_assignment_product_crud_django/blob/main/screenshots/abc.png?raw=true)
 
