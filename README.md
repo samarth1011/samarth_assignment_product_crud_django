@@ -2,6 +2,9 @@
 # SDE 1 Python Assignment
 
 Name: Samarth Godase
+mail: samarth.mailme@gmail.com
+
+I have implemented the assignment using Django Rest Framework and have used class based views and model serializers for the implementation of API.
 
 
 
