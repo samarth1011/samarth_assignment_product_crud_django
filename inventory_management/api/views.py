@@ -1,9 +1,5 @@
-from django.forms import ValidationError
-from django.shortcuts import render
-
 # Create your views here.
 from django.urls import reverse
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Product
 from rest_framework import generics,status
@@ -49,8 +45,11 @@ class FindProductByTitle(APIView):
         # Get the tile from query parameter
         title = kwargs.get('title')  
         
-        if title:products = Product.objects.filter(name__icontains = title)
-        else:products = Product.objects.all()
+        try:
+            products = Product.objects.filter(name__icontains = title)
+            if products.count()==0:raise Exception()
+        except Exception as e:
+            raise APIException(f"Product with title {title} not found", code=status.HTTP_404_NOT_FOUND)
         
         serializer = ProductSerializer(products, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
@@ -59,10 +58,13 @@ class FindProductByTitle(APIView):
 class FindProductByCategory(APIView):
     def get(self, request, *args, **kwargs):
         # Get the tile from query parameter
-        category = kwargs.get('category')
-        
-        if category:products = Product.objects.filter(category__icontains = category)
-        else:products = Product.objects.all()
+        try:
+            category = kwargs.get('category')
+            
+            products = Product.objects.filter(category__icontains = category)
+            if products.count()==0:raise Exception
+        except Exception as e:
+            raise APIException(f"Product with category name {category} not found", code=status.HTTP_404_NOT_FOUND)
         
         serializer = ProductSerializer(products, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
@@ -72,14 +74,32 @@ class FindProductByCategory(APIView):
 class FindProductPriceGreaterThan(APIView):
     def get(self, request, *args, **kwargs):
         # Get the tile from query parameter
-        price = kwargs.get('price')  
+        try:
+            price = kwargs.get('price')  
         
-        if price:products = Product.objects.filter(price__gt=price)
-        else:products = Product.objects.all()
+            products = Product.objects.filter(price__gt=price)
+        except Exception as e:
+            raise APIException("Check the price format you have provided", e)
         
         serializer = ProductSerializer(products, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
+
+
+# Find Product by category name   
+class FindProductById(APIView):
+    def get(self, request, *args, **kwargs):
+        # Get the tile from query parameter
+        try:
+            id = kwargs.get('id')
+        
+            # retrieve the product by ID
+            product = Product.objects.get(id = id)
+        except Exception as e:
+            raise APIException(f"Product with id {id} not found.", code=status.HTTP_404_NOT_FOUND)
+        
+        serializer = ProductSerializer(product)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 class ApiInfo(APIView):
     def get(self, request, *args, **kwargs):
@@ -95,6 +115,11 @@ class ApiInfo(APIView):
                 'url': reverse('product_update_delete', kwargs={'pk': 1}),
                 
                 'description': 'Update or delete a product by ID.'
+            },
+            {
+                'url': reverse('product_find_by_id', kwargs={'id': 1}),
+                
+                'description': 'Find Product by ID.'
             },
             {
                 'url': reverse('product_find_by_title', kwargs={'title': 'saree'}),

@@ -7,11 +7,13 @@ urlpatterns = [
     
     path('product/', views.ProductListCreate.as_view(), name='product_view_create'),
     
-    path('product/<int:pk>/', views.ProductUpdateDelete.as_view(), name='product_update_delete'),
+    path('product/<str:pk>/', views.ProductUpdateDelete.as_view(), name='product_update_delete'),
 
-    path('product/<str:title>/', views.FindProductByTitle.as_view(), name='product_find_by_title'),
+    path('product_by_id/<str:id>/', views.FindProductById.as_view(), name='product_find_by_id'),
 
+    path('product_by_title/<str:title>/', views.FindProductByTitle.as_view(), name='product_find_by_title'),
+    
     path('category/<str:category>/', views.FindProductByCategory.as_view(), name='product_find_by_category'),
 
-    path('product_price_greater_then/<int:price>/', views.FindProductPriceGreaterThan.as_view(), name='product_price_greater_then'),
+    path('product_price_greater_then/<str:price>/', views.FindProductPriceGreaterThan.as_view(), name='product_price_greater_then'),
 ]
