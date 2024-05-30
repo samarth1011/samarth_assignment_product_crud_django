@@ -16,11 +16,11 @@ I have implemented the assignment using Django Rest Framework and have used clas
   [
    {
         "url": "/api/v1/products/",
-        "description": "View and create products, Delete all Products"
+        "description": "View and create products, Delete all Products| Note: Also I could have made seperate URL for view and Add as for view: /api/v1/products/ and Add: /api/v1/products/delete/add/ "
     },
     {
         "url": "/api/v1/products/1/",
-        "description": "Update or delete a product by ID."
+        "description": "Update or delete a product by ID. | Note: Also I could have made seperate URL for edit and delete as for edit: /api/v1/products/edit/1/ and delete: /api/v1/products/delete/1/"
     },
     {
         "url": "/api/v1/products_by_id/1/",
